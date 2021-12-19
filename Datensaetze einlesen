@@ -1,0 +1,9 @@
+### RKI_COVID19
+
+RKI_COVID19 <- read.csv("RKI_COVID19.csv", fileEncoding = "UTF-8"))
+RKI_COVID19[,9] <- as.Date(RKI_COVID19[,9]) 
+
+
+### DIVI_Intensivregister
+
+divi_17_11 <- read_csv("DIVI-Intensivregister_2021-11-17_12-15.csv")
