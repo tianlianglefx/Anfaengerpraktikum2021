@@ -76,7 +76,8 @@ ggplot(data = data_BLM_muenchen, aes(y = anteil, x = Meldedatum)) +
     panel.grid.major = element_line(size = 0.5, linetype = 'solid',
                                     colour = "grey"), 
     panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
-                                    colour = "white") )
+                                    colour = "white") ) +
+  ylim(0,1)
 
 # Belegte Intensivbetten Anteil München an Bayern während BLM
 ggplot(data = divi_BLM, aes(x = date, y = invasiv_anteil)) +
@@ -96,7 +97,8 @@ ggplot(data = divi_BLM, aes(x = date, y = invasiv_anteil)) +
     panel.grid.major = element_line(size = 0.5, linetype = 'solid',
                                     colour = "grey"), 
     panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
-                                    colour = "white") )
+                                    colour = "white") ) +
+  ylim(0,1)
 
 # datensätze vernichten
 divi_BLM <- NULL
@@ -105,4 +107,3 @@ data_BLM_germany <- NULL
 data_BLM_bayern <- NULL
 data_BLM_muenchen <- NULL
 data_BLM_bayern_ohne_muenchen <- NULL
-
