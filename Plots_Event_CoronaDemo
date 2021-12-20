@@ -74,7 +74,9 @@ ggplot(data = data_CovidDemo_muenchen, aes(y = anteil, x = Meldedatum)) +
     panel.grid.major = element_line(size = 0.5, linetype = 'solid',
                                     colour = "grey"), 
     panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
-                                    colour = "white") )
+                                    colour = "white") )+
+  ylim(0,1)
+
 
 # belegte Intensivbetten Prozent
 ggplot(data = divi_CovidDemo, aes(x = date, y = invasiv_anteil)) +
@@ -94,7 +96,8 @@ ggplot(data = divi_CovidDemo, aes(x = date, y = invasiv_anteil)) +
     panel.grid.major = element_line(size = 0.5, linetype = 'solid',
                                     colour = "grey"), 
     panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
-                                    colour = "white") )
+                                    colour = "white") )+
+  ylim(0,1)
 
 # datensätze vernichten
 divi_CovidDemo <- NULL
