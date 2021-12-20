@@ -1,9 +1,9 @@
-# 7 -Tage Hospitalisierungsinzidenz pro 100000 Einwohner in verschiedenen Bundesländer und Deutschland
+# 7 -Tage Hospitalisierung pro 100000 einwohner in verschiedenen Bundesländer
 # Einwohnerzahl aus: https://de.wikipedia.org/wiki/Liste_der_deutschen_Bundesl%C3%A4nder_nach_Bev%C3%B6lkerung Jahr 2020
 # Deutschland Bevölkerung: https://en.wikipedia.org/wiki/Demographics_of_Germany
 
 
-# Subdatensätze erstellen zu den einzelnen Bundesländer 
+# Subdatensätze erstellen für jedes Bundesland und Deutschland 
 hosp <- as.data.frame(Aktuell_Deutschland_COVID_19_Hospitalisierungen)
 
 hosp_7tage_schleswig_holstein <- subset(hosp, Bundesland_Id == "01")
@@ -39,7 +39,7 @@ deutschland_hospt <- aggregate(hosp_7tage_deutschland$`7T_Hospitalisierung_Faell
 deutschland_hospt$Datum <- as.Date(deutschland_hospt$Datum)
 
 
-#  Hospitalisierungsfälle in anderen Bundesländer
+# andere Bundesländer Hospitalisierungsfälle
 
 schleswig_holstein_hospit <- aggregate(hosp_7tage_schleswig_holstein$`7T_Hospitalisierung_Faelle`, hosp_7tage_schleswig_holstein[1], sum)
 schleswig_holstein_hospit$Datum <- as.Date(schleswig_holstein_hospit$Datum)
@@ -93,7 +93,11 @@ thueringen_hospit <- aggregate(hosp_7tage_thueringen$`7T_Hospitalisierung_Faelle
 thueringen_hospit$Datum <- as.Date(thueringen_hospit$Datum)
 
 
+## Jahreswechsel in rot markieren: x- Achse Farben
 
+axiscolors <- c("black","black","black","black","black","black","black",
+                "black","black","black","black","red","black","black","black",
+                "black","black","black","black","black","black","black","black", "red")
 
 
 ## Plot 1: nur Sachsen, Bremen, Bayern und Deutschland farbig markiert
@@ -124,7 +128,19 @@ ggplot()+
   theme(axis.text.x = element_text(size = 18, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
   theme(axis.text.y = element_text(size = 18, face = "bold")) +
   theme(text = element_text(size = 27)) +
-  scale_color_manual(name = " ", values = color_code2)
+  scale_color_manual(name = " ", values = color_code2) +
+  theme(
+    panel.background = element_rect(fill = "white",
+                                    colour = "white",
+                                    size = 0.5, linetype = "solid"),
+    panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                    colour = "grey"), 
+    panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                    colour = "white") ) +
+  theme(axis.text.x = element_text(color=axiscolors)) 
+
+  
+ 
 
  
 ### Plot 2: ab Oktober 2021 (im Bezug auf 4.Welle)
@@ -174,11 +190,20 @@ ggplot()+
   geom_line( size = 2, data = deutschland_hospt_ab_11_Okt, mapping = aes(x = Datum, y = ((x/ 83129285) *100000)/2, col = "Deutschland (Impfquote: 72,4%)"))+
   
   labs(x = "Datum", y = "7-Tage-Inzidenz für Covid-Hospitalisierungen", title = "7-Tage-Inzidenz für Covid-Hospitalisierungen\nin Deutschland und Bundesländern ab Oktober 2021")+
-  scale_x_date(date_breaks = "1 week", date_labels = "%d. %b %y") +  
+  scale_x_date( date_labels = "%d. %b %y") +  
+  expand_limits(x = as.Date(c("2021-10-01", "2021-12-01"))) +
   theme(axis.text.x = element_text(size = 18, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
   theme(axis.text.y = element_text(size = 18, face = "bold")) +
   theme(text = element_text(size = 27)) +
-  scale_color_manual(name = " ", values = color_code3)
+  scale_color_manual(name = " ", values = color_code3)+
+  theme(
+    panel.background = element_rect(fill = "white",
+                                    colour = "white",
+                                    size = 0.5, linetype = "solid"),
+    panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                    colour = "grey"), 
+    panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                    colour = "white") ) 
 
 
 
@@ -216,4 +241,4 @@ ggplot()+
   theme(axis.text.x = element_text(size = 18, angle = 45, vjust = 1, hjust = 1, face = "bold")) +
   theme(axis.text.y = element_text(size = 18, face = "bold")) +
   theme(text = element_text(size = 30)) +
-  scale_color_manual(name = "Bundesländer", values = color_code4)
+  scale_color_manual(name = "Bundesländer", values = color_code4) 
