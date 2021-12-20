@@ -103,4 +103,3 @@ data_CovidDemo_germany <- NULL
 data_CovidDemo_bayern <- NULL
 data_CovidDemo_muenchen <- NULL
 data_CovidDemo_bayern_ohne_muenchen <- NULL
-
