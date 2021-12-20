@@ -89,7 +89,8 @@ ggplot(data = data_IAA_muenchen, aes(y = anteil, x = Meldedatum)) +
     panel.grid.major = element_line(size = 0.5, linetype = 'solid',
                                     colour = "grey"), 
     panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
-                                    colour = "white") )
+                                    colour = "white") ) +
+  ylim(0,1)
 
 # Belegte Intensivbetten Prozent
 ggplot(data = divi_IAA, aes(x = date, y = invasiv_anteil)) +
@@ -112,7 +113,8 @@ ggplot(data = divi_IAA, aes(x = date, y = invasiv_anteil)) +
     panel.grid.major = element_line(size = 0.5, linetype = 'solid',
                                     colour = "grey"), 
     panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
-                                    colour = "white") )
+                                    colour = "white") ) +
+  ylim(0,1)
 
 # Datensätze vernichten
 divi_IAA <- NULL
